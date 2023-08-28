@@ -4,6 +4,7 @@ name: Jest Tests for Node Challenge
 on:
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   Test:
