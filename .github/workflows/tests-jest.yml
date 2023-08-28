@@ -1,0 +1,30 @@
+name: Jest Tests for Node Challenge
+
+
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    defaults:
+      run:
+        working-directory: node-refactor
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run tests and set up jest DB
+        run: npm run test
