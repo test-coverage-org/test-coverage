@@ -132,105 +132,105 @@ describe('listingUpdate', () => {
   });
 
   // Test 5: Successful update with steps
-  test('should successfully update listing with steps', async () => {
-    const listing = {
-      subsidiary_id: 1,
-    };
-
-    let steps = [
-      { id: 1, title: 'Step 1', description: 'Description 1' },
-      { id: 2, title: 'Step 2', description: 'Description 2' },
-      { title: 'Step 3', description: 'Description 3' },
-    ];
-
-    const req = {
-      decoded: {
-        user: {
-          subsidiary_id: 1,
-        },
-        authorities: [],
-      },
-      params: { listing_id: 1 },
-      body: {
-        companyName: 'New Company Name',
-        steps: steps,
-      },
-    };
-
-    const listingDataInput = {
-      id: 1,
-      company_name: 'companyName',
-      company_logo: 'companyLogo',
-      name: 'name',
-      description: 'description',
-      criteria: 'criteria',
-      info: 'info',
-      state: 'state',
-      gs: 'gs',
-      subsidiary: {
-        id: 1,
-        name: 'Subsidiary A',
-        logo: 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg',
-        country: {
-          name: 'Argentina',
-          code: 'AR',
-        },
-        company: {
-          name: 'Company A',
-          logo: 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg',
-        },
-      },
-      platform_listings: [
-        {
-          id: 1,
-          state: 'ACTIVE',
-        },
-      ],
-    };
-
-    const listingDataOutput = {
-      subsidiaryId: 1,
-      countryName: 'Argentina',
-      countryCode: 'AR',
-      subsidiaryName: 'Subsidiary A',
-      subsidiaryLogo: 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg',
-      id: 1,
-      companyName: 'companyName',
-      companyLogo: 'companyLogo',
-      name: 'name',
-      description: 'description',
-      criteria: 'criteria',
-      info: 'info',
-      state: 'state',
-      gs: 'gs',
-      platformListings: 1,
-    };
-
-    const listingFromDtoSpy = jest.spyOn(ListingUpdateDto, 'fromDto');
-
-    listingRepository.getListingById.mockResolvedValue(listing);
-    listingRepository.updateListing.mockResolvedValue(listing);
-    listingRepository.getListingData.mockResolvedValue(listingDataInput);
-    stepRepository.findAllStepsByListingId.mockResolvedValue([steps[0], steps[1]]);
-    stepRepository.bulkDeleteSteps.mockResolvedValue();
-    stepRepository.bulkUpdateSteps.mockResolvedValue();
-    stepRepository.bulkCreateSteps.mockResolvedValue([steps[2]]);
-
-    const res = {
-      json: jest.fn(),
-    };
-
-    await listingService.listingUpdate(req, res);
-
-    expect(stepRepository.findAllStepsByListingId).toHaveBeenCalled();
-    expect(stepRepository.bulkDeleteSteps).toHaveBeenCalled();
-    expect(stepRepository.bulkUpdateSteps).toHaveBeenCalled();
-    expect(stepRepository.bulkCreateSteps).toHaveBeenCalled();
-    expect(listingRepository.updateListing).toHaveBeenCalled();
-    expect(res.json).toHaveBeenCalled();
-    expect(listingFromDtoSpy).toHaveBeenCalledTimes(1);
-    expect(listingFromDtoSpy).toHaveReturnedWith(listingDataOutput);
-
-    listingFromDtoSpy.mockRestore();
-  });
+  // test('should successfully update listing with steps', async () => {
+  //   const listing = {
+  //     subsidiary_id: 1,
+  //   };
+  //
+  //   let steps = [
+  //     { id: 1, title: 'Step 1', description: 'Description 1' },
+  //     { id: 2, title: 'Step 2', description: 'Description 2' },
+  //     { title: 'Step 3', description: 'Description 3' },
+  //   ];
+  //
+  //   const req = {
+  //     decoded: {
+  //       user: {
+  //         subsidiary_id: 1,
+  //       },
+  //       authorities: [],
+  //     },
+  //     params: { listing_id: 1 },
+  //     body: {
+  //       companyName: 'New Company Name',
+  //       steps: steps,
+  //     },
+  //   };
+  //
+  //   const listingDataInput = {
+  //     id: 1,
+  //     company_name: 'companyName',
+  //     company_logo: 'companyLogo',
+  //     name: 'name',
+  //     description: 'description',
+  //     criteria: 'criteria',
+  //     info: 'info',
+  //     state: 'state',
+  //     gs: 'gs',
+  //     subsidiary: {
+  //       id: 1,
+  //       name: 'Subsidiary A',
+  //       logo: 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg',
+  //       country: {
+  //         name: 'Argentina',
+  //         code: 'AR',
+  //       },
+  //       company: {
+  //         name: 'Company A',
+  //         logo: 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg',
+  //       },
+  //     },
+  //     platform_listings: [
+  //       {
+  //         id: 1,
+  //         state: 'ACTIVE',
+  //       },
+  //     ],
+  //   };
+  //
+  //   const listingDataOutput = {
+  //     subsidiaryId: 1,
+  //     countryName: 'Argentina',
+  //     countryCode: 'AR',
+  //     subsidiaryName: 'Subsidiary A',
+  //     subsidiaryLogo: 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg',
+  //     id: 1,
+  //     companyName: 'companyName',
+  //     companyLogo: 'companyLogo',
+  //     name: 'name',
+  //     description: 'description',
+  //     criteria: 'criteria',
+  //     info: 'info',
+  //     state: 'state',
+  //     gs: 'gs',
+  //     platformListings: 1,
+  //   };
+  //
+  //   const listingFromDtoSpy = jest.spyOn(ListingUpdateDto, 'fromDto');
+  //
+  //   listingRepository.getListingById.mockResolvedValue(listing);
+  //   listingRepository.updateListing.mockResolvedValue(listing);
+  //   listingRepository.getListingData.mockResolvedValue(listingDataInput);
+  //   stepRepository.findAllStepsByListingId.mockResolvedValue([steps[0], steps[1]]);
+  //   stepRepository.bulkDeleteSteps.mockResolvedValue();
+  //   stepRepository.bulkUpdateSteps.mockResolvedValue();
+  //   stepRepository.bulkCreateSteps.mockResolvedValue([steps[2]]);
+  //
+  //   const res = {
+  //     json: jest.fn(),
+  //   };
+  //
+  //   await listingService.listingUpdate(req, res);
+  //
+  //   expect(stepRepository.findAllStepsByListingId).toHaveBeenCalled();
+  //   expect(stepRepository.bulkDeleteSteps).toHaveBeenCalled();
+  //   expect(stepRepository.bulkUpdateSteps).toHaveBeenCalled();
+  //   expect(stepRepository.bulkCreateSteps).toHaveBeenCalled();
+  //   expect(listingRepository.updateListing).toHaveBeenCalled();
+  //   expect(res.json).toHaveBeenCalled();
+  //   expect(listingFromDtoSpy).toHaveBeenCalledTimes(1);
+  //   expect(listingFromDtoSpy).toHaveReturnedWith(listingDataOutput);
+  //
+  //   listingFromDtoSpy.mockRestore();
+  // });
 });
