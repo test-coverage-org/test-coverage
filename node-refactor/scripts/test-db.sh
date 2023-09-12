@@ -17,4 +17,4 @@ dotenv -e .env.jest npx sequelize-cli db:drop
 dotenv -e .env.jest npx sequelize-cli db:create
 dotenv -e .env.jest npx sequelize-cli db:migrate
 
-npm run test:jest
+npm run test:jest:dev
