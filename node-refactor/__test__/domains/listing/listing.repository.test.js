@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { getListingData } = require('@src/domains/listing/listing.repository');
+const { getListingData, dummyFunction} = require('@src/domains/listing/listing.repository');
 const { PlatformListings } = require('@db/models');
 const { createListingsData, cleanUpListingsData } = require('@test/tests.preparation');
 
@@ -65,5 +65,19 @@ describe('getListingData', () => {
       },
     });
     expect(result.platform_listings.length).toBe(platformListingsCount);
+  });
+
+  test('should return null for an invalid listing id', async () => {
+    const invalidListingId = -1; // An id that doesn't exist in the database
+    const result = await getListingData(invalidListingId);
+    expect(result).toBeNull();
+  });
+
+  //test dummy function
+  test('should return listing data for a valid listing id', async () => {
+    const listingId = 1;
+    const result = await dummyFunction(listingId);
+    expect(result).not.toBeNull();
+    expect(result.id).toBe(listingId);
   });
 });
