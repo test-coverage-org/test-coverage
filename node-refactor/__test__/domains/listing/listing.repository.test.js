@@ -2,6 +2,7 @@
 const { getListingData, dummyFunction} = require('@src/domains/listing/listing.repository');
 const { PlatformListings } = require('@db/models');
 const { createListingsData, cleanUpListingsData } = require('@test/tests.preparation');
+const {getAllCountries} = require('@src/domains/country/country.repository');
 
 describe('getListingData', () => {
   beforeAll(async () => {
@@ -79,5 +80,12 @@ describe('getListingData', () => {
     const result = await dummyFunction(listingId);
     expect(result).not.toBeNull();
     expect(result.id).toBe(listingId);
+  });
+});
+
+describe('getAllCountries', () => {
+  test('get all countries', async () => {
+    const result = await getAllCountries();
+    expect(result).not.toBeNull();
   });
 });

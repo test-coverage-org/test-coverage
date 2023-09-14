@@ -9,6 +9,12 @@ const config = {
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
     '^@test/(.*)$': '<rootDir>/__test__/$1',
   },
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+  ],
+
 };
 
 module.exports = config;
