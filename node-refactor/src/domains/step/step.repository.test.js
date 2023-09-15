@@ -6,7 +6,7 @@ const {
   bulkUpdateSteps,
 } = require('@src/domains/step/step.repository');
 
-const { Step } = require('@src/db/models');
+const { Step } = require('@db/models');
 jest.mock('@src/db/models');
 
 describe('stepRepository', () => {

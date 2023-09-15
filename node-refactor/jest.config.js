@@ -2,7 +2,6 @@ const config = {
   moduleFileExtensions: ['js', 'json'],
   testEnvironment: 'node',
   rootDir: './',
-  roots: ['./__test__'],
   moduleNameMapper: {
     '^@src/(.*)$': '<rootDir>/src/$1',
     '^@db/(.*)$': '<rootDir>/src/db/$1',
