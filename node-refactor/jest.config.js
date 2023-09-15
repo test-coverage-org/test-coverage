@@ -9,7 +9,9 @@ const config = {
     '^@test/(.*)$': '<rootDir>/__test__/$1',
   },
   collectCoverageFrom: [
-    '**/*.{js,jsx}',
+    'src/**/*.{js,jsx}',
+    '!src/db/migrations/**',
+    '!src/db/seeders/**',
     '!**/node_modules/**',
     '!**/vendor/**',
   ],
