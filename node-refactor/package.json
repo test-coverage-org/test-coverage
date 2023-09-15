@@ -9,7 +9,7 @@
     "dev": "bash ./scripts/run-dev.sh",
     "prod": "bash ./scripts/run-prod.sh",
     "test:jest": "DOTENV_CONFIG_PATH=.env.jest jest -i --setupFiles dotenv/config --detectOpenHandles",
-    "test:jest:dev": "DOTENV_CONFIG_PATH=.env.jest jest -i --findRelatedTests src/domains/listing/listing.repository.js --coverage --setupFiles dotenv/config --detectOpenHandles",
+    "test:jest:dev": "DOTENV_CONFIG_PATH=.env.jest jest -i --coverage --setupFiles dotenv/config --detectOpenHandles",
     "start": "node src/index.js",
     "start:dev": "dotenv -e .env nodemon src/index.js",
     "start:prod": "dotenv -e .env.production node src/index.js",
