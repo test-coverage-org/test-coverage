@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { getListingData, dummyFunction, anotherDummyFunction} = require('@src/domains/listing/listing.repository');
+const { getListingData, dummyFunction, anotherDummyFunction, thirdDummyFunction} = require('@src/domains/listing/listing.repository');
 const { PlatformListings } = require('@db/models');
 const { createListingsData, cleanUpListingsData } = require('@test/tests.preparation');
 
@@ -93,4 +93,11 @@ describe('getListingData', () => {
     const result = await anotherDummyFunction(listingId);
     expect(result).not.toBeNull();
   });
+
+  //test third dummy function, should throw not found exception
+  test('should not return listing data for a valid listing id', async () => {
+    const listingId = 4;
+    await expect(thirdDummyFunction(listingId)).rejects.toThrowError('Listing'); //todo: check if this is the correct way to test for exceptions
+  });
+
 });
