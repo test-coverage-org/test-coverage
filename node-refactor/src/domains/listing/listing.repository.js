@@ -18,6 +18,12 @@ module.exports = {
     return listing;
   },
 
+  async anotherDummyFunction(id) {
+    let listing = await Listing.findByPk(id);
+    if (!listing) throw new NotFoundException('Listing');
+    return listing;
+  },
+
   async updateListing(listingToUpdate, newListingData) {
     return await listingToUpdate.update({
       company_name: newListingData.companyName || listingToUpdate.companyName,
