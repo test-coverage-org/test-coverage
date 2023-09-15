@@ -97,7 +97,7 @@ describe('getListingData', () => {
   //test third dummy function, should throw not found exception
   test('should not return listing data for a valid listing id', async () => {
     const listingId = 4;
-    await expect(thirdDummyFunction(listingId)).rejects.toThrowError('Listing');
+    await expect(thirdDummyFunction(listingId)).rejects.toThrowError('Listing'); //todo: check if this is the correct way to test for exceptions
   });
 
 });
