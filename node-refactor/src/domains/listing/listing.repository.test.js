@@ -81,9 +81,9 @@ describe('getListingData', () => {
     expect(result.id).toBe(listingId);
   });
 
-  //test another dummy function
+  //test another dummy function, should throw not found exception
   test('should not return listing data for a valid listing id', async () => {
     const listingId = 4;
-    await anotherDummyFunction(listingId);
+    await expect(anotherDummyFunction(listingId)).rejects.toThrowError('Listing');
   });
 });
