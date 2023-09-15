@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { getListingData, dummyFunction} = require('@src/domains/listing/listing.repository');
+const { getListingData, dummyFunction, anotherDummyFunction} = require('@src/domains/listing/listing.repository');
 const { PlatformListings } = require('@db/models');
 const { createListingsData, cleanUpListingsData } = require('@test/tests.preparation');
 
@@ -79,5 +79,11 @@ describe('getListingData', () => {
     const result = await dummyFunction(listingId);
     expect(result).not.toBeNull();
     expect(result.id).toBe(listingId);
+  });
+
+  //test another dummy function
+  test('should not return listing data for a valid listing id', async () => {
+    const listingId = 4;
+    await anotherDummyFunction(listingId);
   });
 });
