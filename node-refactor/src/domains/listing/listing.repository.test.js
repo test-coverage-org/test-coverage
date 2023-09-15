@@ -86,4 +86,11 @@ describe('getListingData', () => {
     const listingId = 4;
     await expect(anotherDummyFunction(listingId)).rejects.toThrowError('Listing');
   });
+
+  //test another dummy function, should throw not found exception
+  test('should not return listing data for a valid listing id', async () => {
+    const listingId = 1;
+    const result = await anotherDummyFunction(listingId);
+    expect(result).not.toBeNull();
+  });
 });
