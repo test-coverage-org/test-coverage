@@ -32,10 +32,10 @@ jobs:
       - name: Run tests and set up jest DB
         run: npm run test
 
-      - name: Show directory structure
-        run: |
-          pwd
-          ls -R
+#      - name: Show directory structure
+#        run: |
+#          pwd
+#          ls -R
 
       - name: Codecov
         uses: codecov/codecov-action@v3
@@ -54,5 +54,7 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
         with:
-          coverageLocations: node-refactor/coverage/lcov.info:lcov
+          coverageLocations: coverage/lcov.info:lcov
+          prefix: /home/runner/work/test-coverage/test-coverage/node-refactor
+          coverage-input-type: lcov
           debug: true
