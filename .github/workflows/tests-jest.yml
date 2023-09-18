@@ -49,4 +49,4 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
         with:
-          coverageLocation: node-refactor/coverage/lcov.info
+          coverageLocations: node-refactor/coverage/lcov.info:lcov # Adjust if your coverage location is different.
