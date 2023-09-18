@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Test:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,7 +32,7 @@ jobs:
       - name: Run tests and set up jest DB
         run: npm run test
 
-      - name: Upload coverage reports to Codecov
+      - name: Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -43,3 +43,8 @@ jobs:
         uses: coverallsapp/github-action@v2
         env:
           COVERALLS_REPO_TOKEN:  ${{ secrets.COVERALLS_TOKEN }}
+
+      - name: Code Climate
+        uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
