@@ -32,6 +32,11 @@ jobs:
       - name: Run tests and set up jest DB
         run: npm run test
 
+      - name: Show directory structure
+        run: |
+          pwd
+          ls -R
+
       - name: Codecov
         uses: codecov/codecov-action@v3
         env:
