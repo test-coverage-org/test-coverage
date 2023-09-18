@@ -45,6 +45,6 @@ jobs:
           COVERALLS_REPO_TOKEN:  ${{ secrets.COVERALLS_TOKEN }}
 
       - name: Code Climate
-        uses: paambaati/codeclimate-action@v2.2.4
+        uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
