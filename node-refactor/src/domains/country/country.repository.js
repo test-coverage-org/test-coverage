@@ -11,5 +11,9 @@ module.exports = {
 
   async createCountry(country) {
     return await models.Country.create(country); //
+  },
+
+  async createAnotherCountry(country) {
+    return await models.Country.create(country); //
   }
 };

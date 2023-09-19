@@ -53,4 +53,6 @@ jobs:
       - name: Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-        run: ./cc-test-reporter after-build --exit-code $?
+          GIT_COMMIT_SHA: ${{ github.sha }}
+          GIT_BRANCH: ${{ github.ref }}
+        run: ./cc-test-reporter after-build
