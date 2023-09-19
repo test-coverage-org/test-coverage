@@ -15,7 +15,6 @@ const config = {
     '!**/node_modules/**',
     '!**/vendor/**',
   ],
-
 };
 
 module.exports = config;
