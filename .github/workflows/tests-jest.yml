@@ -33,7 +33,7 @@ jobs:
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
+          ./cc-test-reporter before-build --debug
 
       - name: Run tests and set up jest DB
         run: npm run test
@@ -48,6 +48,4 @@ jobs:
       - name: Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-          GIT_COMMIT_SHA: ${{ github.sha }}
-          GIT_BRANCH: ${{ github.ref }}
-        run: ./cc-test-reporter after-build
+        run: ./cc-test-reporter after-build --debug
