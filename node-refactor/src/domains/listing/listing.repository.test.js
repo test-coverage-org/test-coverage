@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { getListingData, dummyFunction, anotherDummyFunction, thirdDummyFunction} = require('@src/domains/listing/listing.repository');
+const { getListingData, dummyFunction, anotherDummyFunction, thirdDummyFunction, findFirstListingId} = require('@src/domains/listing/listing.repository');
 const { PlatformListings } = require('@db/models');
 const { createListingsData, cleanUpListingsData } = require('@test/tests.preparation');
 
@@ -15,7 +15,7 @@ describe('getListingData', () => {
   });
 
   test('should return listing data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await getListingData(listingId);
     expect(result).not.toBeNull();
     expect(result.id).toBe(listingId);
@@ -28,35 +28,35 @@ describe('getListingData', () => {
   });
 
   test('should return subsidiary data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await getListingData(listingId);
     expect(result).toHaveProperty('subsidiary');
     expect(result.subsidiary).not.toBeNull();
   });
 
   test('should return country data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await getListingData(listingId);
     expect(result.subsidiary).toHaveProperty('country');
     expect(result.subsidiary.country).not.toBeNull();
   });
 
   test('should return company data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await getListingData(listingId);
     expect(result.subsidiary).toHaveProperty('company');
     expect(result.subsidiary.company).not.toBeNull();
   });
 
   test('should return platform listings data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await getListingData(listingId);
     expect(result).toHaveProperty('platform_listings');
     expect(result.platform_listings).toBeDefined();
   });
 
   test('should return correct platformListings count for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await getListingData(listingId);
     const platformListingsCount = await PlatformListings.count({
       where: {
@@ -75,7 +75,7 @@ describe('getListingData', () => {
 
   //test dummy function
   test('should return listing data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await dummyFunction(listingId);
     expect(result).not.toBeNull();
     expect(result.id).toBe(listingId);
@@ -83,20 +83,20 @@ describe('getListingData', () => {
 
   //test another dummy function, should throw not found exception
   test('should not return listing data for a valid listing id', async () => {
-    const listingId = 4;
+    const listingId = 0;
     await expect(anotherDummyFunction(listingId)).rejects.toThrowError('Listing');
   });
 
   //test another dummy function, should throw not found exception
   test('should not return listing data for a valid listing id', async () => {
-    const listingId = 1;
+    const listingId = await findFirstListingId();
     const result = await anotherDummyFunction(listingId);
     expect(result).not.toBeNull();
   });
 
   //test third dummy function, should throw not found exception
   test('should not return listing data for a valid listing id', async () => {
-    const listingId = 4;
+    const listingId = 0;
     await expect(thirdDummyFunction(listingId)).rejects.toThrowError('Listing'); //todo: check if this is the correct way to test for exceptions
   });
 

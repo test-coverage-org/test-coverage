@@ -79,4 +79,8 @@ module.exports = {
       ],
     });
   },
+
+  async findFirstListingId() {
+    return (await Listing.findAll())[0].id;
+  },
 };
