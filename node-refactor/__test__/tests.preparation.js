@@ -5,27 +5,28 @@ module.exports = {
     let sampleLogoUrl = 'https://www.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg';
 
     // Country
-    await Country.bulkCreate([
+    const countries = await Country.bulkCreate([
       { name: 'Argentina', code: 'AR' },
       { name: 'Mexico', code: 'MX' },
       { name: 'United States of America', code: 'US' },
     ]);
 
     // Company
-    await Company.bulkCreate([
+    const companies = await Company.bulkCreate([
       { name: 'Company A', logo: sampleLogoUrl },
       { name: 'Company B', logo: sampleLogoUrl },
       { name: 'Company C', logo: sampleLogoUrl },
     ]);
 
     // Subsidiary
-    await Subsidiary.bulkCreate([
-      { name: 'Subsidiary A', logo: sampleLogoUrl, country_id: 1, company_id: 1 },
-      { name: 'Subsidiary B', logo: sampleLogoUrl, country_id: 2, company_id: 2 },
+
+    const subsidiaries = await Subsidiary.bulkCreate([
+      { name: 'Subsidiary A', logo: sampleLogoUrl, country_id: countries[0].id, company_id: companies[0].id },
+      { name: 'Subsidiary B', logo: sampleLogoUrl, country_id: countries[1].id, company_id: companies[1].id },
     ]);
 
     // Listing
-    await Listing.bulkCreate([
+    const listing = await Listing.bulkCreate([
       {
         company_name: 'Company A',
         company_logo: sampleLogoUrl,
@@ -35,7 +36,7 @@ module.exports = {
         info: 'some info',
         state: 'ACTIVE',
         gs: '',
-        subsidiary_id: 1,
+        subsidiary_id: subsidiaries[0].id,
       },
       {
         company_name: 'Company A',
@@ -46,7 +47,7 @@ module.exports = {
         info: 'some info',
         state: 'INACTIVE',
         gs: '',
-        subsidiary_id: 1,
+        subsidiary_id: subsidiaries[0].id,
       },
       {
         company_name: 'Company B',
@@ -57,15 +58,15 @@ module.exports = {
         info: 'some info',
         state: 'INACTIVE',
         gs: '',
-        subsidiary_id: 2,
+        subsidiary_id: subsidiaries[1].id,
       },
     ]);
 
     // platform_listings
     await PlatformListings.bulkCreate([
-      { listing_id: 1, state: 'ACTIVE' },
-      { listing_id: 2, state: 'INACTIVE' },
-      { listing_id: 3, state: 'ACTIVE' },
+      { listing_id: listing[0].id, state: 'ACTIVE' },
+      { listing_id: listing[1].id, state: 'INACTIVE' },
+      { listing_id: listing[2].id, state: 'ACTIVE' },
     ]);
   },
   async cleanUpListingsData() {
