@@ -3,9 +3,9 @@ name: Jest Tests for Node Challenge
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
   pull_request:
-    branches: [main, master]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [ 18.x ]
 
     defaults:
       run:
@@ -29,13 +29,25 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Set up Code Climate test-reporter
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+
+      - name: Before build
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+        run: ./cc-test-reporter before-build
+
       - name: Run tests and set up jest DB
         run: npm run test
 
-#      - name: Show directory structure
-#        run: |
-#          pwd
-#          ls -R
+      - name: After build
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+        run: ./cc-test-reporter after-build --exit-code $?
 
       - name: Codecov
         uses: codecov/codecov-action@v3
@@ -47,13 +59,4 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         env:
-          COVERALLS_REPO_TOKEN:  ${{ secrets.COVERALLS_TOKEN }}
-
-      - name: Code Climate
-        uses: paambaati/codeclimate-action@v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-        with:
-#          coverageLocations: coverage/lcov.info:lcov
-#          prefix: /home/runner/work/test-coverage/test-coverage/node-refactor
-          debug: true
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
