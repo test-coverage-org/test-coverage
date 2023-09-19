@@ -45,11 +45,6 @@ jobs:
         with:
           flags: unittests
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@v2
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-
       - name: Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
