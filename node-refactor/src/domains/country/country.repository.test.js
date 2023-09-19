@@ -5,7 +5,6 @@ const {getAllCountries} = require('@src/domains/country/country.repository');
 describe('getListingData', () => {
   beforeAll(async () => {
     // Set up the database and create the necessary models
-    await cleanUpListingsData();
     await createListingsData();
   });
 
