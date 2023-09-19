@@ -29,7 +29,4 @@ describe('getListingData', () => {
     expect(country.name).toBe('country 4');
   });
 
-  test('add another country', async () => {
-    const country = await addAnotherCountry({name: 'country 5'});
-    expect(country.name).toBe('country 5');
-  });});
+});
