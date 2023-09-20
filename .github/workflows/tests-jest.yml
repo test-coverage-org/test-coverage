@@ -16,9 +16,9 @@ jobs:
       matrix:
         node-version: [ 18.x ]
 
-    defaults:
-      run:
-        working-directory: node-refactor
+#    defaults:
+#      run:
+#        working-directory: node-refactor
 
     steps:
       - name: Checkout
@@ -39,18 +39,20 @@ jobs:
 
       - name: Run tests and set up jest DB
         run: |
+          cd node-refactor
           npm run test
+          cd ..
 
-      - name: Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          flags: unittests
+#      - name: Codecov
+#        uses: codecov/codecov-action@v3
+#        env:
+#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#        with:
+#          flags: unittests
 
       - name: Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
-        run: ./cc-test-reporter after-build -t lcov -p node-refactor --debug
+        run: ./cc-test-reporter after-build -t lcov -p /node-refactor --debug
