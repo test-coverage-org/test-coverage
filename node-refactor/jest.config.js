@@ -15,6 +15,7 @@ const config = {
     '!**/node_modules/**',
     '!**/vendor/**',
   ],
+  coverageReporters: [['lcov', { projectRoot: '..' }], 'text', 'text-summary'],
 };
 
 module.exports = config;

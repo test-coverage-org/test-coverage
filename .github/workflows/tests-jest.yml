@@ -16,9 +16,9 @@ jobs:
       matrix:
         node-version: [ 18.x ]
 
-    defaults:
-      run:
-        working-directory: node-refactor
+#    defaults:
+#      run:
+#        working-directory: node-refactor
 
     steps:
       - name: Checkout
@@ -34,16 +34,21 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
+          pwd
+          ls -la
 
       - name: Run tests and set up jest DB
-        run: npm run test
+        run: |
+          cd node-refactor
+          npm run test
+          cd ..
 
-      - name: Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          flags: unittests
+#      - name: Codecov
+#        uses: codecov/codecov-action@v3
+#        env:
+#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#        with:
+#          flags: unittests
 
       - name: Code Climate
         env:
@@ -51,5 +56,7 @@ jobs:
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
-          ./cc-test-reporter format-coverage -t lcov
-          ./cc-test-reporter after-build --debug --exit-code 0
+          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json node-refactor/coverage/lcov.info --debug
+          echo "---------------------"
+          echo "---------------------"
+          ./cc-test-reporter upload-coverage coverage/codeclimate.json --debug
