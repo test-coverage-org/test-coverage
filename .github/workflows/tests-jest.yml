@@ -59,4 +59,4 @@ jobs:
           ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.node.json node-refactor/coverage/lcov.info --debug
           echo "---------------------"
           echo "---------------------"
-          ./cc-test-reporter after-build -t lcov -p node-refactor --debug
+          ./cc-test-reporter after-build --debug
