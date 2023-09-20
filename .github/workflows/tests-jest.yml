@@ -52,4 +52,4 @@ jobs:
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           ./cc-test-reporter format-coverage -t lcov
-          ./cc-test-reporter after-build --debug --exit-code 0 --prefix ..
+          ./cc-test-reporter after-build --debug --exit-code 0 --prefix /home/runner/work/test-coverage/test-coverage
