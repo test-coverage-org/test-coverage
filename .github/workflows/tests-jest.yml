@@ -16,9 +16,9 @@ jobs:
       matrix:
         node-version: [ 18.x ]
 
-    defaults:
-      run:
-        working-directory: node-refactor
+#    defaults:
+#      run:
+#        working-directory: node-refactor
 
     steps:
       - name: Checkout
@@ -36,7 +36,10 @@ jobs:
           ./cc-test-reporter before-build
 
       - name: Run tests and set up jest DB
-        run: npm run test
+        run: |
+          cd node-refactor
+          npm run test
+          cd ..
 
       - name: Codecov
         uses: codecov/codecov-action@v3
@@ -50,4 +53,4 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
-        run: ./cc-test-reporter after-build -t lcov --debug --exit-code 0 --prefix /home/runner/work/test-coverage/test-coverage/node-refactor
+        run: ./cc-test-reporter after-build -t lcov --prefix /home/runner/work/test-coverage/test-coverage/node-refactor --debug
