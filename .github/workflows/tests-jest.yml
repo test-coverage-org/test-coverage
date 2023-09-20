@@ -51,5 +51,4 @@ jobs:
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
-          ./cc-test-reporter format-coverage -t lcov
-          ./cc-test-reporter after-build --debug --exit-code 0
+          ./cc-test-reporter after-build -t lcov --debug --exit-code 0
