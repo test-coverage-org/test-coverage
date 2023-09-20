@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Print env variables
+        run: env
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
@@ -33,7 +36,7 @@ jobs:
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build --debug
+          ./cc-test-reporter before-build
 
       - name: Run tests and set up jest DB
         run: npm run test
@@ -48,4 +51,9 @@ jobs:
       - name: Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+          GIT_COMMIT_SHA: ${{ github.sha }}
+          GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: ./cc-test-reporter after-build --debug
+
+      - name: Print env variables 2
+        run: env
