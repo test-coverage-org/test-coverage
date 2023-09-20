@@ -24,9 +24,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Print env variables
-        run: env
-
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
@@ -53,7 +50,6 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
-        run: ./cc-test-reporter after-build --debug
-
-      - name: Print env variables 2
-        run: env
+        run: |
+          ./cc-test-reporter format-coverage -t lcov
+          ./cc-test-reporter after-build --debug --exit-code 0
