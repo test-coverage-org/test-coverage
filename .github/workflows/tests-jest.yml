@@ -50,4 +50,6 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
-        run: ./cc-test-reporter after-build --debug --exit-code $?
+        run: |
+          ./cc-test-reporter format-coverage -t lcov
+          ./cc-test-reporter after-build --debug --exit-code 0
