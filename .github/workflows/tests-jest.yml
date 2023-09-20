@@ -56,7 +56,7 @@ jobs:
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
-          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.node.json node-refactor/coverage/lcov.info --debug
+          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json node-refactor/coverage/lcov.info --debug
           echo "---------------------"
           echo "---------------------"
-          ./cc-test-reporter upload-coverage --debug
+          ./cc-test-reporter upload-coverage coverage/codeclimate.json --debug
