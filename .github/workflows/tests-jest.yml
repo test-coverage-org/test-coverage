@@ -51,8 +51,3 @@ jobs:
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: ./cc-test-reporter after-build --debug --exit-code $?
-
-      - name: Code Climate show coverage
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-        run: ./cc-test-reporter show-coverage --debug coverage/lcov.info
