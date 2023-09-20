@@ -16,9 +16,9 @@ jobs:
       matrix:
         node-version: [ 18.x ]
 
-#    defaults:
-#      run:
-#        working-directory: node-refactor
+    defaults:
+      run:
+        working-directory: node-refactor
 
     steps:
       - name: Checkout
@@ -34,12 +34,12 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
+          pwd
+          ls -la
 
       - name: Run tests and set up jest DB
         run: |
-          cd node-refactor
           npm run test
-          cd ..
 
       - name: Codecov
         uses: codecov/codecov-action@v3
