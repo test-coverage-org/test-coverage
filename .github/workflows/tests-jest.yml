@@ -55,4 +55,4 @@ jobs:
       - name: Code Climate show coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-        run: ./cc-test-reporter show-coverage
+        run: ./cc-test-reporter show-coverage --debug
