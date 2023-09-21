@@ -4,6 +4,9 @@ coverage:
       default:
         target: 80%
         threshold: 1%
+parsers:
+  javascript:
+    enable_partials: yes
 comment:
   layout: "diff,flags,tree,betaprofiling"
   show_critical_paths: true
