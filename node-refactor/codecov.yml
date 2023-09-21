@@ -7,6 +7,6 @@ coverage:
 parsers:
   javascript:
     enable_partials: yes
-comment:
-  layout: "diff,flags,tree,betaprofiling"
-  show_critical_paths: true
+#comment:
+#  layout: "diff,flags,tree,betaprofiling"
+#  show_critical_paths: true
