@@ -50,6 +50,12 @@ jobs:
         with:
           flags: unittests
 
+      - name: Print dir
+        run: ls node-refactor/coverage
+
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash) -f node-refactor/coverage/lcov.info
+
       - name: Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
