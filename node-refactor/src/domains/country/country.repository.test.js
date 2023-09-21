@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 const { createListingsData, cleanUpListingsData } = require('@test/tests.preparation');
-const {getAllCountries, createCountry, addAnotherCountry, getById} = require('@src/domains/country/country.repository');
+const {getAllCountries, createCountry, getById} = require('@src/domains/country/country.repository');
 
 describe('getListingData', () => {
   beforeAll(async () => {
