@@ -6,14 +6,14 @@ module.exports = {
   },
 
   async getById(countryId) {
-    return await models.Country.findByPk(countryId); //
+    return await models.Country.findByPk(countryId);
   },
 
   async createCountry(country) {
-    return await models.Country.create(country);
+    return await models.Country.create(country); //
   },
 
   async addAnotherCountry(country) {
-    return await models.Country.create(country); //
+    return await models.Country.create(country);
   }
 };
