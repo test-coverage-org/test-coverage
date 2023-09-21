@@ -49,6 +49,8 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           flags: unittests
+
+      - name: Upload coverage to Codecov
         run: bash <(curl -s https://codecov.io/bash) -f node-refactor/coverage/coverage.json
 
       - name: Code Climate
