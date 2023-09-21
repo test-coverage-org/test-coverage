@@ -10,7 +10,7 @@ module.exports = {
   },
 
   async createCountry(country) {
-    return await models.Country.create(country);
+    return await models.Country.create(country); //
   },
 
   async addAnotherCountry(country) {
