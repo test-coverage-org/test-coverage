@@ -38,6 +38,6 @@ jobs:
         with:
           coverageCommand: npm run test
           debug: true
-          working-directory: node-refactor
+          workingDirectory: node-refactor
           coverageLocations: |
             node-refactor/coverage/lcov.info:lcov
