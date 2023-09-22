@@ -62,10 +62,10 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
           GIT_COMMIT_SHA: ${{ github.sha }}
-          GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
+          GIT_BRANCH: 'test-coverage/${{ github.head_ref || github.ref_name }}'
         run: |
-          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json node-refactor/coverage/lcov.info --debug
+          ./cc-test-reporter format-coverage -t lcov -o node-refactor/coverage/codeclimate.json node-refactor/coverage/lcov.info --debug
           echo "---------------------"
           cat coverage/codeclimate.json
           echo "---------------------"
-          ./cc-test-reporter upload-coverage coverage/codeclimate.json --debug
+          ./cc-test-reporter upload-coverage node-refactor/coverage/codeclimate.json --debug
