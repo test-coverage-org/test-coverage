@@ -36,8 +36,8 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
         with:
-          coverageCommand: cd node-refactor && npm run test && cd ..
-          workingDirectory: .
+          coverageCommand: npm run test
+          workingDirectory: ../
           debug: true
           coverageLocations: |
             node-refactor/coverage/lcov.info:lcov
