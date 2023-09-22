@@ -15,7 +15,7 @@ module.exports = {
 
   async bulkDeleteSteps(deleted) {
     if (deleted.length <= 0) return;
-    await Step.destroy({ where: { id: deleted } });
+    await Step.destroy({ where: { id: deleted } }); //
   },
 
   async createStep(stepData, listingId) {

@@ -25,7 +25,7 @@ const resolveStepsFileParser = async (file) => {
     logger.debug(`file extension: ${extension}`);
     switch (extension) {
       case 'csv':
-        return await parseCsv(file);
+        return await parseCsv(file); //
       case 'xlsx':
         return await parseXlsx(file);
       case 'json':
