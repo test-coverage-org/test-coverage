@@ -66,6 +66,6 @@ jobs:
         run: |
           ./cc-test-reporter format-coverage -t lcov -o node-refactor/coverage/codeclimate.json node-refactor/coverage/lcov.info --debug
           echo "---------------------"
-          cat coverage/codeclimate.json
+          cat node-refactor/coverage/codeclimate.json
           echo "---------------------"
           ./cc-test-reporter upload-coverage node-refactor/coverage/codeclimate.json --debug
