@@ -7,7 +7,7 @@ module.exports = {
   },
 
   async getCountryById(req, res) {
-    let countryId = req.params.id;
+    let countryId = req.params.id; //
     let country = await countryRepository.getById(countryId);
     res.send(country);
   }
