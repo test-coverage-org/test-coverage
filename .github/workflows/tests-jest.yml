@@ -68,4 +68,4 @@ jobs:
           echo "---------------------"
           cat node-refactor/coverage/codeclimate.json
           echo "---------------------"
-          ./cc-test-reporter upload-coverage node-refactor/coverage/codeclimate.json --debug
+          ./cc-test-reporter upload-coverage -i node-refactor/coverage/codeclimate.json --debug
