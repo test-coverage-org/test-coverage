@@ -14,6 +14,6 @@ module.exports = {
   },
 
   async addAnotherCountry(country) {
-    return await models.Country.create(country);
+    return await models.Country.create(country); //
   }
 };
