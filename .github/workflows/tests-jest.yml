@@ -1,11 +1,17 @@
-name: Jest Tests for Node Challenge
+name: Jest Tests Codecov
 
 
 on:
   push:
     branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -16,10 +22,6 @@ jobs:
       matrix:
         node-version: [ 18 ]
 
-#    defaults:
-#      run:
-#        working-directory: node-refactor
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,14 +30,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Set up Code Climate test-reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-          pwd
-          ls -la
 
       - name: Run tests and set up jest DB
         run: |
@@ -49,23 +43,3 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           flags: unittests
-
-      - name: Print dir
-        run: ls node-refactor/coverage
-
-      - name: Upload coverage to Codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: bash <(curl -s https://codecov.io/bash) -f node-refactor/coverage/lcov.info
-
-      - name: Code Climate
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-          GIT_COMMIT_SHA: ${{ github.sha }}
-          GIT_BRANCH: 'test-coverage/${{ github.head_ref || github.ref_name }}'
-        run: |
-          ./cc-test-reporter format-coverage -t lcov -o node-refactor/coverage/codeclimate.json node-refactor/coverage/lcov.info --debug
-          echo "---------------------"
-          cat node-refactor/coverage/codeclimate.json
-          echo "---------------------"
-          ./cc-test-reporter upload-coverage -i node-refactor/coverage/codeclimate.json --debug

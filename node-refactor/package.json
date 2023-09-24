@@ -71,6 +71,7 @@
     "process": "^0.11.10",
     "sequelize": "^6.30.0",
     "signale": "^1.4.0",
+    "supertest": "^6.3.3",
     "xlsx": "^0.18.5",
     "yargs": "^17.7.1"
   }

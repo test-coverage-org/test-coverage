@@ -9,4 +9,6 @@ mainRouter.use('/country', /*withAuthUser,*/ countryController);
 mainRouter.use('/listing', /*withAuthUser,*/ listingController);
 mainRouter.use('/step', /*withAuthUser,*/ stepController);
 
+mainRouter.get('/healthcheck', (req, res) => res.status(200).send('OK'));
+
 module.exports = mainRouter;
