@@ -15,6 +15,7 @@ module.exports = {
 
   async dummyFunction(id) {
     let listing = await Listing.findByPk(id);
+    logger.info('This is a log message');
     if (!listing) throw new NotFoundException('Listing');
     return listing;
   },
@@ -22,6 +23,7 @@ module.exports = {
   async anotherDummyFunction(id) {
     let listing = await Listing.findByPk(id);
     if (!listing) throw new NotFoundException('Listing');
+    logger.info('This is a log message');
     return listing;
   },
 
