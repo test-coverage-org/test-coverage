@@ -1,5 +1,6 @@
 const { Listing, Subsidiary, Country, Company, PlatformListings } = require('@db/models');
 const { NotFoundException } = require('@utils/errors');
+const logger = require('@utils/logger');
 
 module.exports = {
   async getAllListings() {
@@ -25,8 +26,9 @@ module.exports = {
   },
 
   async thirdDummyFunction(id) {
-    let listing = await Listing.findByPk(id); // This is a comment
+    let listing = await Listing.findByPk(id);
     if (!listing) throw new NotFoundException('Listing');
+    logger.info('This is a log message');
     return listing;
   },
 
