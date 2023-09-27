@@ -61,7 +61,7 @@ module.exports = {
     let stepsReceived = body.steps ? body.steps : [];
     await processSteps(stepsReceived, updatedListing.id);
 
-    // Return the updated listing.
+    // Return the updated listing...
     const listingProcessed = await listingRepository.getListingData(updatedListing.id);
     return res.json(ListingUpdateDto.fromDto(listingProcessed));
   },
