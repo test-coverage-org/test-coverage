@@ -25,7 +25,7 @@ module.exports = {
   },
 
   async thirdDummyFunction(id) {
-    let listing = await Listing.findByPk(id);
+    let listing = await Listing.findByPk(id); // This is a comment
     if (!listing) throw new NotFoundException('Listing');
     return listing;
   },
