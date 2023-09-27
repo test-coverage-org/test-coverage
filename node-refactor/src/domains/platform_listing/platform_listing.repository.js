@@ -6,6 +6,6 @@ module.exports = {
   },
 
   async getPlatformListingById(id) {
-    return await models.PlatformListings.findByPk(id);
+    return await models.PlatformListings.findByPk(id); //
   }
 };
