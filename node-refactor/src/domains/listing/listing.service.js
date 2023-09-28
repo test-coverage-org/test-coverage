@@ -45,9 +45,7 @@ module.exports = {
   async listingUpdate(req, res) {
     let { decoded, params, body } = req;
 
-    if (!decoded || !decoded.user) {
-      throw new BadRequestException('User not found');
-    }
+    if (!decoded || !decoded.user) throw new BadRequestException('User not found');
 
     let listing = await listingRepository.getListingById(params.listing_id);
 
