@@ -1,5 +1,5 @@
 const listingRepository = require('@src/domains/listing/listing.repository');
-const { ForbiddenException, BadRequestException } = require('@utils/errors');
+const { ForbiddenException, BadRequestException, NotFoundException} = require('@utils/errors');
 const stepRepository = require('@src/domains/step/step.repository');
 const { ListingUpdateDto } = require('@src/domains/listing/dto/listing-update.dto');
 const { Roles } = require('@utils/constants');
@@ -39,7 +39,9 @@ module.exports = {
   },
   async getListingById(req, res) {
     const listing = await listingRepository.getListingById(req.params.listing_id);
-    res.json(listing);
+    if (listing) res.json(listing);
+    else
+      throw new NotFoundException('Listing');
   },
 
   async listingUpdate(req, res) {

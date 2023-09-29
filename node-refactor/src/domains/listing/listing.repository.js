@@ -29,7 +29,6 @@ module.exports = {
   async thirdDummyFunction(id) {
     let listing = await Listing.findByPk(id);
     if (!listing) throw new NotFoundException('Listing');
-    logger.info('This is a log message');
     return listing;
   },
 

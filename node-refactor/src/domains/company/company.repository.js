@@ -6,6 +6,6 @@ module.exports = {
   },
 
   async findCompanyById(companyId) {
-    return await models.Company.findByPk(companyId); //
+    return await models.Company.findByPk(companyId);
   },
 };
