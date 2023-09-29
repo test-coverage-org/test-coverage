@@ -15,6 +15,32 @@ module.exports = {
   async findAllCompanies(){
     const infoLog = 'infoLog';
     logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
+    logger.info(infoLog);
     return await models.Company.findAll({});
   }
 };
