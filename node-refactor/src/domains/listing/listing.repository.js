@@ -22,7 +22,8 @@ module.exports = {
 
   async anotherDummyFunction(id) {
     let listing = await Listing.findByPk(id);
-    if (!listing) throw new NotFoundException('Listing');
+    if (!listing)
+      throw new NotFoundException('Listing');
     return listing;
   },
 
