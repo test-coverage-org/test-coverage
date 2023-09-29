@@ -40,8 +40,7 @@ module.exports = {
   async getListingById(req, res) {
     const listing = await listingRepository.getListingById(req.params.listing_id);
     if (listing) res.json(listing);
-    else
-      throw new NotFoundException('Listing');
+    else throw new NotFoundException('Listing');
   },
 
   async listingUpdate(req, res) {
