@@ -1,4 +1,5 @@
 const models = require('@src/db/models');
+const {info} = require('@utils/logger');
 
 module.exports = {
   async getAllCompanies() {
@@ -6,6 +7,8 @@ module.exports = {
   },
 
   async findCompanyById(companyId) {
-    return await models.Company.findByPk(companyId); //
+    const infoLog = 'infoLog';
+    info(infoLog);
+    return await models.Company.findByPk(companyId);
   },
 };
