@@ -45,9 +45,7 @@ module.exports = {
   async listingUpdate(req, res) {
     let { decoded, params, body } = req;
 
-    if (!decoded || !decoded.user) {
-      throw new BadRequestException('User not found');
-    }
+    if (!decoded || !decoded.user) throw new BadRequestException('User not found');
 
     let listing = await listingRepository.getListingById(params.listing_id);
 
@@ -61,7 +59,7 @@ module.exports = {
     let stepsReceived = body.steps ? body.steps : [];
     await processSteps(stepsReceived, updatedListing.id);
 
-    // Return the updated listing.
+    // Return the updated listing...
     const listingProcessed = await listingRepository.getListingData(updatedListing.id);
     return res.json(ListingUpdateDto.fromDto(listingProcessed));
   },

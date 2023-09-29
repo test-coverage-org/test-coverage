@@ -4,4 +4,8 @@ module.exports = {
   async getAllPlatformListing() {
     return await models.PlatformListings.findAll({});
   },
+
+  async getPlatformListingById(id) {
+    return await models.PlatformListings.findByPk(id);
+  }
 };
