@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db-challenge:
+    image: postgres:alpine
+    container_name: db-challenge
+    restart: always
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  server-challenge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: server-challenge
+    restart: always
+    tty: true
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      db-challenge:
+        condition: service_healthy
+    links:
+      - db-challenge
+
+volumes:
+  db-challenge:
