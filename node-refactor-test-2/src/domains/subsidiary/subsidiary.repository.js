@@ -6,6 +6,6 @@ module.exports = {
   },
 
   async getSubsidiaryById(id) {
-    return await models.Subsidiary.findByPk(id);
+    return await models.Subsidiary.findByPk(id); //
   },
 };
