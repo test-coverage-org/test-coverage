@@ -7,7 +7,7 @@ module.exports = {
   },
 
   async findCompanyById(companyId) {
-    const infoLog = 'infoLog'; //
+    const infoLog = 'infoLog';
     info(infoLog);
     return await models.Company.findByPk(companyId);
   },
